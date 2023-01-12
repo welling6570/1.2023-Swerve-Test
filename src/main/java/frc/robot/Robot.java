@@ -8,6 +8,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
   private final XboxController m_controller = new XboxController(0);
@@ -23,7 +24,19 @@ public class Robot extends TimedRobot {
     driveWithJoystick(false);
     m_swerve.updateOdometry();
   }
-
+  @Override
+  public void robotPeriodic() {    
+  SmartDashboard.putNumber("FrontLeftRot", m_swerve.getflRota());
+  SmartDashboard.putNumber("FrontLeftDrive", m_swerve.getflDriveEnc());
+  SmartDashboard.putNumber("FrontRightRot", m_swerve.getfrRota());
+  SmartDashboard.putNumber("FrontRightDrive", m_swerve.getfrDriveEnc());
+  SmartDashboard.putNumber("BackRightRot", m_swerve.getbrRota());
+  SmartDashboard.putNumber("BackRightDrive", m_swerve.getbrDriveEnc());
+  SmartDashboard.putNumber("BackLeftRot", m_swerve.getblRota());
+  SmartDashboard.putNumber("BackLeftDrive", m_swerve.getblDriveEnc());
+  SmartDashboard.putNumber("GyroAngle", m_swerve.getAngle());
+  
+  }
   @Override
   public void teleopPeriodic() {
     driveWithJoystick(true);
