@@ -33,20 +33,20 @@ public class SwerveModule {
   private final RelativeEncoder m_driveEncoder;
   private final Encoder m_turningEncoder;
   // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(1, 0, 0);
+  private final PIDController m_drivePIDController = new PIDController(0, 0, 0);
 
   // Gains are for example purposes only - must be determined for your own robot!
   private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
-          1,
+          0.4,
           0,
           0,
           new TrapezoidProfile.Constraints(
               kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);
-  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);
+  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(0, 0.5);
+  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(0, 0.5);
 
   /**
    * Constructs a SwerveModule with a drive motor, turning motor, drive encoder and turning encoder.
@@ -110,9 +110,17 @@ public class SwerveModule {
    *
    * @return The current position of the module.
    */
+
   public SwerveModulePosition getPosition() {
     return new SwerveModulePosition(
         m_driveEncoder.getPosition(), new Rotation2d(m_turningEncoder.getDistance()));
+  }
+  public double getRota() {
+    return m_turningEncoder.getDistance();
+  }
+
+  public double getDriveEnc() {
+    return m_driveEncoder.getPosition();
   }
 
   /**
@@ -140,5 +148,8 @@ public class SwerveModule {
 
     m_driveMotor.setVoltage(driveOutput + driveFeedforward);
     m_turningMotor.setVoltage(turnOutput + turnFeedforward);
+    //m_driveMotor.setVoltage(driveOutput);
+    //m_turningMotor.setVoltage(turnOutput);
+
   }
 }

@@ -70,7 +70,35 @@ public class Drivetrain {
     m_backLeft.setDesiredState(swerveModuleStates[2]);
     m_backRight.setDesiredState(swerveModuleStates[3]);
   }
+  public double getflRota() {
+    return m_frontLeft.getRota();
+  }
+  public double getfrRota() {
+    return m_frontRight.getRota();
+  }
+  public double getblRota() {
+    return m_backLeft.getRota();
+  }
+  public double getbrRota() {
+    return m_backRight.getRota();
+  }
 
+  public double getflDriveEnc() {
+    return m_frontLeft.getDriveEnc();
+  }
+  public double getfrDriveEnc() {
+    return m_frontRight.getDriveEnc();
+  }
+  public double getblDriveEnc() {
+    return m_backLeft.getDriveEnc();
+  }
+  public double getbrDriveEnc() {
+    return m_backRight.getDriveEnc();
+  }
+  public double getAngle() {
+    return m_gyro.getAngle();
+  
+  }
   /** Updates the field relative position of the robot. */
   public void updateOdometry() {
     m_odometry.update(
