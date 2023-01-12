@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 
 public class SwerveModule {
-  private static final double kWheelRadius = 0.0508;
-  private static final int kEncoderResolution = 4096;
+  private static final double kWheelRadius = 2;
+  private static final int kEncoderResolution = 280;
 
   private static final double kModuleMaxAngularVelocity = Drivetrain.kMaxAngularSpeed;
   private static final double kModuleMaxAngularAcceleration =
@@ -88,7 +88,7 @@ public class SwerveModule {
     // Set the distance (in this case, angle) in radians per pulse for the turning encoder.
     // This is the the angle through an entire rotation (2 * pi) divided by the
     // encoder resolution.
-    m_turningEncoder.setDistancePerPulse((2*Math.PI*1.2)/497);
+    m_turningEncoder.setDistancePerPulse((2*Math.PI*1.2)/1988);
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
