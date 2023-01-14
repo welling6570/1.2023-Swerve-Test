@@ -95,6 +95,22 @@ public class Drivetrain {
   public double getbrDriveEnc() {
     return m_backRight.getDriveEnc();
   }
+  
+  public double getflTurnVolts() {
+    return m_frontLeft.getTurnOutput();
+  }
+  
+  public double getfrTurnVolts() {
+    return m_frontRight.getTurnOutput();
+  }
+  
+  public double getbrTurnVolts() {
+    return m_backRight.getTurnOutput();
+  }
+  
+  public double getblTurnVolts() {
+    return m_backLeft.getTurnOutput();
+  }
   public double getAngle() {
     return m_gyro.getAngle();
   

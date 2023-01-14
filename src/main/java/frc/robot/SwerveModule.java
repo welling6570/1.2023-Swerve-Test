@@ -16,6 +16,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveModule {
   private static final double kWheelRadius = 0.051;
@@ -34,7 +35,7 @@ public class SwerveModule {
   private final Encoder m_turningEncoder;
   // Gains are for example purposes only - must be determined for your own robot!
   private final PIDController m_drivePIDController = new PIDController(0, 0, 0);
-
+  public double turnOutVolts;
   // Gains are for example purposes only - must be determined for your own robot!
   private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
@@ -118,6 +119,10 @@ public class SwerveModule {
     return Math.toDegrees(m_turningEncoder.getDistance());
   }
 
+  public double getTurnOutput() {
+    return turnOutVolts;
+  }
+
   public double getDriveEnc() {
     return m_driveEncoder.getPosition();
   }
@@ -144,7 +149,7 @@ public class SwerveModule {
 
     final double turnFeedforward =
         m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
-
+    turnOutVolts = (turnOutput + turnFeedforward);
     m_driveMotor.setVoltage(driveOutput + driveFeedforward);
     m_turningMotor.setVoltage(turnOutput + turnFeedforward);
     //m_driveMotor.setVoltage(driveOutput);
