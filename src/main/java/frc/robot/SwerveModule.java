@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 
 public class SwerveModule {
-  private static final double kWheelRadius = 2;
+  private static final double kWheelRadius = 0.051;
   private static final int kEncoderResolution = 280;
 
   private static final double kModuleMaxAngularVelocity = Drivetrain.kMaxAngularSpeed;
@@ -38,7 +38,7 @@ public class SwerveModule {
   // Gains are for example purposes only - must be determined for your own robot!
   private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
-          0.4,
+          0.01,
           0,
           0,
           new TrapezoidProfile.Constraints(
@@ -65,7 +65,7 @@ public class SwerveModule {
       //int driveEncoderChannelB,
       int turningEncoderChannelA,
       int turningEncoderChannelB) {
-    //m_driveMotor = new PWMSparkMax(driveMotorChannel);
+    //m_driveMotor = new PWMSparkMax(driveMotorChannel); 
     //m_turningMotor = new PWMSparkMax(turningMotorChannel);
     //New motor definitions, using cansparkmax -DW
     m_driveMotor = new CANSparkMax(driveMotorChannel, MotorType.kBrushless);
@@ -77,7 +77,6 @@ public class SwerveModule {
     //New encoder is read from the sparkmax on the CAN bus -DW
     m_driveEncoder = m_driveMotor.getEncoder();
 
-
     m_turningEncoder = new Encoder(turningEncoderChannelA, turningEncoderChannelB);
 
     // Set the distance per pulse for the drive encoder. We can simply use the
@@ -88,7 +87,7 @@ public class SwerveModule {
     // Set the distance (in this case, angle) in radians per pulse for the turning encoder.
     // This is the the angle through an entire rotation (2 * pi) divided by the
     // encoder resolution.
-    m_turningEncoder.setDistancePerPulse((2*Math.PI*1.2)/1988);
+    m_turningEncoder.setDistancePerPulse((2.4*Math.PI)/497);
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
@@ -116,7 +115,7 @@ public class SwerveModule {
         m_driveEncoder.getPosition(), new Rotation2d(m_turningEncoder.getDistance()));
   }
   public double getRota() {
-    return m_turningEncoder.getDistance();
+    return Math.toDegrees(m_turningEncoder.getDistance());
   }
 
   public double getDriveEnc() {
