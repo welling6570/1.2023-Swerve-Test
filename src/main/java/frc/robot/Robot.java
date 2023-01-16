@@ -35,6 +35,10 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("BackLeftRot", m_swerve.getblRota());
   SmartDashboard.putNumber("BackLeftDrive", m_swerve.getblDriveEnc());
   SmartDashboard.putNumber("GyroAngle", m_swerve.getAngle());
+  SmartDashboard.putNumber("BackLeftTV", m_swerve.getblTurnVolts());
+  SmartDashboard.putNumber("FrontLeftTV", m_swerve.getflTurnVolts());
+  SmartDashboard.putNumber("FrontRightTV", m_swerve.getfrTurnVolts());
+  SmartDashboard.putNumber("BackRightTV", m_swerve.getbrTurnVolts());
   
   }
   @Override
